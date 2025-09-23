@@ -29,6 +29,8 @@ class WalletViewController: UITableViewController {
         self.mwpClient = MWPClient.getInstance(to: wallet)
         
         isWalletInstalledLabel.text = "\(wallet.isInstalled)"
+        // self.log("Available MWP Version: \(CoinbaseWalletSDK.getCoinbaseWalletMWPVersion() ?? "none")")
+
         updateSessionStatus()
         
         addLogNotificationObserver()

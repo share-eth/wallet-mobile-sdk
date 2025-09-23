@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    compileSdk 32
+    compileSdk 34
 
     defaultConfig {
         minSdk 23
-        targetSdk 32
+        targetSdk 34
 
         versionCode 3
         versionName libs.versions.sdk.version.get()
@@ -63,7 +63,6 @@ dependencies {
     testImplementation libs.junit4
     testImplementation libs.kotest
     androidTestImplementation libs.androidx.junit4
-    androidTestImplementation libs.espresso
 }
 
 afterEvaluate {
@@ -78,11 +77,11 @@ afterEvaluate {
                 pom {
                     name = 'coinbase-wallet-sdk'
                     description = 'Coinbase Wallet Mobile SDK'
-                    url = 'https://github.com/coinbase/wallet-mobile-sdk'
+                    url = 'https://github.com/MobileWalletProtocol/wallet-mobile-sdk'
                     licenses {
                         license {
                             name = 'Coinbase License'
-                            url = 'https://github.com/coinbase/wallet-mobile-sdk/blob/master/LICENSE'
+                            url = 'https://github.com/MobileWalletProtocol/wallet-mobile-sdk/blob/master/LICENSE'
                         }
                     }
                     developers {
@@ -93,13 +92,13 @@ afterEvaluate {
                         }
                         developer {
                             id = 'vishnumad'
-                            name = 'Vishnu Mad'
+                            name = 'Vishnu Madhusoodanan'
                             email = 'vishnu.madhusoodanan@coinbase.com'
                         }
                     }
                     scm {
-                        developerConnection = 'scm:git@github.com:coinbase/wallet-mobile-sdk.git'
-                        url = 'https://github.com/coinbase/wallet-mobile-sdk/tree/main'
+                        developerConnection = 'scm:git@github.com:MobileWalletProtocol/wallet-mobile-sdk.git'
+                        url = 'https://github.com/MobileWalletProtocol/wallet-mobile-sdk/tree/main'
                     }
                 }
             }

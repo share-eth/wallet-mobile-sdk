@@ -8,7 +8,6 @@
 import Foundation
 import CryptoKit
 
-@available(iOS 13.0, *)
 public final class MWPHost {
     public static func deriveSymmetricKey(
         with ownPrivateKey: PrivateKey,

@@ -74,7 +74,8 @@ sealed class Web3JsonRPC {
         val maxFeePerGas: BigInt?,
         val maxPriorityFeePerGas: BigInt?,
         val gasLimit: BigInt?,
-        val chainId: String
+        val chainId: String,
+        val actionSource: ActionSource? = null
     ) : Web3JsonRPC()
 
     @Serializable

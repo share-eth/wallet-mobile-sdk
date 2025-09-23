@@ -8,10 +8,7 @@
 import Foundation
 import CryptoKit
 
-@available(iOS 13.0, *)
 public typealias PrivateKey = Curve25519.KeyAgreement.PrivateKey
-
-@available(iOS 13.0, *)
 public typealias PublicKey = Curve25519.KeyAgreement.PublicKey
 
 public protocol RawRepresentableKey: Codable {
@@ -19,10 +16,7 @@ public protocol RawRepresentableKey: Codable {
     var rawRepresentation: Data { get }
 }
 
-@available(iOS 13.0, *)
 extension PrivateKey: RawRepresentableKey {}
-
-@available(iOS 13.0, *)
 extension PublicKey: RawRepresentableKey {}
 
 extension RawRepresentableKey {

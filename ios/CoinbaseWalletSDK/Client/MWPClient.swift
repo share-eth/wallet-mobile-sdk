@@ -9,8 +9,18 @@ import Foundation
 import CryptoKit
 import UIKit
 
-@available(iOS 13.0, *)
 public final class MWPClient {
+
+    // TODO: Use client configuration to determine supported protocol versions
+    static public func getVersion() -> String? {
+        if UIApplication.shared.canOpenURL(URL(string: "mwp+1.1://")!) {
+            return "1.1"
+        } else if isCoinbaseWalletInstalled() {
+            return "1.0"
+        } else {
+            return nil
+        }
+    }
 
     // MARK: - Instantiate
     
@@ -65,10 +75,9 @@ public final class MWPClient {
         initialActions: [Action]? = [Action(jsonRpc: .eth_requestAccounts)],
         onResponse: @escaping (ResponseResult, Account?) -> Void
     ) {
-        let hasUnsupportedAction = initialActions?.contains(where: {
-            let action = $0
-            return unsupportedHandShakeMethod.contains(where: {action.method == $0 })
-        })
+        let hasUnsupportedAction = initialActions?.contains { action in
+            ["eth_signTransaction", "eth_sendTransaction"].contains(where: { action.method == $0 })
+        }
         
         guard hasUnsupportedAction != true else {
             onResponse(.failure(MWPError.invalidHandshakeRequest), nil)
@@ -128,10 +137,7 @@ public final class MWPClient {
             return
         }
         
-        UIApplication.shared.open(
-            url,
-            options: [.universalLinksOnly: url.isHttp]
-        ) { result in
+        UIApplication.shared.open(url) { result in
             guard result == true else {
                 onResponse(.failure(MWPError.openUrlFailed))
                 return

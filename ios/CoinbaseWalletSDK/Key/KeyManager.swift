@@ -8,7 +8,6 @@
 import Foundation
 import CryptoKit
 
-@available(iOS 13.0, *)
 final class KeyManager {
     private(set) var ownPrivateKey: PrivateKey
     var ownPublicKey: PublicKey {
