@@ -11,11 +11,12 @@ import UIKit
 
 public final class MWPClient {
 
-    // TODO: Use client configuration to determine supported protocol versions
     static public func getVersion() -> String? {
-        if UIApplication.shared.canOpenURL(URL(string: "mwp+1.1://")!) {
+        if UIApplication.shared.canOpenURL(URL(string: "mwp+2.0://")!) {
+            return "2.0"
+        } else if UIApplication.shared.canOpenURL(URL(string: "mwp+1.1://")!) {
             return "1.1"
-        } else if isCoinbaseWalletInstalled() {
+        } else if UIApplication.shared.canOpenURL(URL(string: "cbwallet://")!) {
             return "1.0"
         } else {
             return nil
@@ -207,12 +208,16 @@ public final class MWPClient {
     @discardableResult
     public func resetSession() -> Result<Void, Swift.Error> {
         do {
-            TaskManager.reset(host: host)
+            clearTasks()
             try keyManager.resetOwnPrivateKey()
             return .success(())
         } catch {
             return .failure(error)
         }
+    }
+    
+    public func clearTasks() {
+        TaskManager.reset(host: host)
     }
     
     private func handleHandshakeResponse(_ response: EncryptedResponseMessage) throws {
